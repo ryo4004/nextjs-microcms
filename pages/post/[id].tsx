@@ -1,17 +1,19 @@
-import { NextPage } from 'next'
 import { NextLink } from '../../components/Link'
 import { getPosts, getPost } from '../api/api'
 import styles from '../../styles/Post.module.scss'
 
-import type { InferGetStaticPropsType, GetStaticProps, GetStaticPaths } from 'next'
+import type { GetStaticProps, GetStaticPaths } from 'next'
 import type { Post, PostList } from '../api/types'
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>
-
-export const Page: NextPage<Props> = ({ post }) => {
+export const Page = ({ post }: { post: Post }) => {
   return (
     <div className={styles.post}>
       <h1>{post.title}</h1>
+      <div className={styles.tags}>
+        {post.tags.map((tag) => (
+          <div key={tag.id} className={styles.tag}>{tag.tag}</div>
+        ))}
+      </div>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
       <footer>
         <NextLink to="/">ホーム</NextLink>
