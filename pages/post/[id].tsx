@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import { NextLink } from '../../components/Link'
 import { getPosts, getPost } from '../api/api'
 import styles from '../../styles/Post.module.scss'
 
@@ -12,6 +13,9 @@ export const Page: NextPage<Props> = ({ post }) => {
     <div className={styles.post}>
       <h1>{post.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: post.body }} />
+      <footer>
+        <NextLink to="/">ホーム</NextLink>
+      </footer>
     </div>
   )
 }
