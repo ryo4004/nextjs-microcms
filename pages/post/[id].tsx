@@ -1,9 +1,9 @@
 import { NextLink } from '../../components/Link'
-import { getPosts, getPost } from '../api/api'
+import { getPost, fetchAllPosts } from '../api/api'
 import styles from '../../styles/Post.module.scss'
 
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import type { Post, PostList } from '../api/types'
+import type { Post } from '../api/types'
 
 export const Page = ({ post }: { post: Post }) => {
   return (
@@ -36,8 +36,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await getPosts<PostList>()
-  const paths = response.contents.map((post) => `/post/${post.id}`)
+  const allPosts = await fetchAllPosts()
+  const paths = allPosts.map((post) => `/post/${post.id}`)
   return { paths, fallback: false }
 }
 
