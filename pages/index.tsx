@@ -7,6 +7,7 @@ import type { GetStaticProps } from 'next'
 import type { PostList } from './api/types'
 
 export default function Home({ postList }: { postList: PostList }) {
+  console.log(postList)
   return (
     <div className={styles.home}>
       <Head>
@@ -27,6 +28,11 @@ export default function Home({ postList }: { postList: PostList }) {
               <NextLink to={'/post/' + post.id}>
                 <h2>{post.title}</h2>
               </NextLink>
+              <div className={styles.tags}>
+                {post.tags.map((tag) => (
+                  <div key={tag.id} className={styles.tag}>{tag.tag}</div>
+                ))}
+              </div>
               <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
             </div>
           )
