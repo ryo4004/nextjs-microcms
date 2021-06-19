@@ -17,9 +17,13 @@ export default function Home({ postList }: { postList: PostList }) {
       </Head>
 
       <div className={styles.title}>
-        <h1>Sample Blog</h1>
+        <h1>
+          <NextLink to="/">Sample Blog</NextLink>
+        </h1>
         <NextLink to="/about">About</NextLink>
       </div>
+
+      <Pagination totalCount={postList.totalCount} activePage={1} />
 
       <main className={styles.main}>
         {postList.contents.map((post) => {
@@ -41,7 +45,7 @@ export default function Home({ postList }: { postList: PostList }) {
         })}
       </main>
 
-      <Pagination totalCount={postList.totalCount} />
+      <Pagination totalCount={postList.totalCount} activePage={1} />
     </div>
   )
 }
