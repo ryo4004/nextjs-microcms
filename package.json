@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preprettier": "prettier --write 'styles/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
+    "prettier": "prettier --write 'pages/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "dependencies": {
     "next": "11.0.0",
