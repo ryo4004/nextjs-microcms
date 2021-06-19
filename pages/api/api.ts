@@ -1,4 +1,5 @@
 import { createClient } from 'microcms-js-sdk'
+import { PER_PAGE } from './pagination'
 import type { PostList, Post } from './types'
 
 const client = createClient({
@@ -24,7 +25,7 @@ export const getAbout = async <T>(): Promise<T> => {
 }
 
 export const fetchAllPosts = async (offset: number = 0, posts: Array<Post> = []): Promise<Array<Post>> => {
-  const limit = 5
+  const limit = PER_PAGE
   const allPosts = posts
   const response = await getPosts<PostList>({ offset, limit })
   const newAllPosts = [...allPosts, ...response.contents]

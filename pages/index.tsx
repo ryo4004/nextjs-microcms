@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { NextLink } from '../components/Link'
 import { Pagination } from '../components/Pagination'
 import { getPosts } from './api/api'
+import { PER_PAGE } from './api/pagination'
 import styles from '../styles/Home.module.scss'
 
 import type { GetStaticProps } from 'next'
@@ -51,7 +52,7 @@ export default function Home({ postList }: { postList: PostList }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await getPosts<PostList>({ offset: 0, limit: 5 })
+  const response = await getPosts<PostList>({ offset: 0, limit: PER_PAGE })
   if (!response) {
     return { notFound: true }
   }

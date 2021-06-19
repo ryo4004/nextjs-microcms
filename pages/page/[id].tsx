@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { NextLink } from '../../components/Link'
-import Link from 'next/link'
 import { Pagination } from '../../components/Pagination'
 import { getPosts } from '../api/api'
 import { PER_PAGE, range } from '../api/pagination'
@@ -55,7 +54,7 @@ export default function Page({ postList, page }: { postList: PostList; page: num
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
   if (params?.id) {
-    const response = await getPosts<PostList>({ offset: (Number(params.id) - 1) * 5, limit: 5 })
+    const response = await getPosts<PostList>({ offset: (Number(params.id) - 1) * PER_PAGE, limit: PER_PAGE })
     return { props: { postList: response, page: Number(params.id) } }
   }
   return { notFound: true }
