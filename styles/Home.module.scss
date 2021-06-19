@@ -1,7 +1,30 @@
 .home {
-  padding: 0 1em;
+  .title {
+    margin: 8px;
+  }
 
   .main {
     margin: 1em 0;
+
+    .post {
+      a {
+        h2 {
+          margin: 8px 0;
+          padding: 8px;
+        }
+
+        &:hover h2 {
+          background: #eee;
+        }
+      }
+
+      .body {
+        margin: 0 8px;
+
+        img {
+          display: none;
+        }
+      }
+    }
   }
 }

@@ -15,15 +15,19 @@ export default function Home({ postList }: { postList: PostList }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Sample Blog</h1>
-      <NextLink to="/about">About</NextLink>
+      <div className={styles.title}>
+        <h1>Sample Blog</h1>
+        <NextLink to="/about">About</NextLink>
+      </div>
 
       <main className={styles.main}>
         {postList.contents.map((post) => {
           return (
-            <div key={post.id}>
-              <NextLink to={'/post/' + post.id}>{post.title}</NextLink>
-              <div dangerouslySetInnerHTML={{ __html: post.body }} />
+            <div className={styles.post} key={post.id}>
+              <NextLink to={'/post/' + post.id}>
+                <h2>{post.title}</h2>
+              </NextLink>
+              <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
             </div>
           )
         })}
