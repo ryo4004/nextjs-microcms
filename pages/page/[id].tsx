@@ -6,7 +6,7 @@ import { PER_PAGE, range } from '../api/pagination'
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import type { PostList } from '../api/types'
 
-export default function BlogPageId({ postList }: { postList: PostList }) {
+export default function BlogPageId({ postList, page }: { postList: PostList; page: number }) {
   return (
     <div>
       <ul>
@@ -18,7 +18,7 @@ export default function BlogPageId({ postList }: { postList: PostList }) {
           </li>
         ))}
       </ul>
-      <Pagination totalCount={postList.totalCount} />
+      <Pagination totalCount={postList.totalCount} activePage={page} />
     </div>
   )
 }
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context
   if (params?.id) {
     const response = await getPosts<PostList>({ offset: (Number(params.id) - 1) * 5, limit: 5 })
-    return { props: { postList: response } }
+    return { props: { postList: response, page: Number(params.id) } }
   }
   return { notFound: true }
 }

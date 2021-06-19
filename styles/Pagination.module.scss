@@ -7,6 +7,14 @@
   li {
     margin: 0 2px;
 
+    &.active {
+      a {
+        border: 0.55px solid #666;
+        background: #666;
+        color: #fff;
+      }
+    }
+
     a {
       padding: 2px 6px;
       border: 0.55px solid #ccc;
