@@ -2,7 +2,7 @@ import { createClient } from 'microcms-js-sdk' //ES6
 
 const client = createClient({
   serviceDomain: 'nextjs-microcms',
-  apiKey: String(process.env.NEXT_PUBLIC_MICROCMS_TOKEN),
+  apiKey: String(process.env.NEXT_SECRET_MICROCMS_TOKEN),
 })
 
 export const request = async <T>(path: string): Promise<T> => {

@@ -11,7 +11,9 @@ export const Page = ({ post }: { post: Post }) => {
       <h1>{post.title}</h1>
       <div className={styles.tags}>
         {post.tags.map((tag) => (
-          <div key={tag.id} className={styles.tag}>{tag.tag}</div>
+          <div key={tag.id} className={styles.tag}>
+            {tag.tag}
+          </div>
         ))}
       </div>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
