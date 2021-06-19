@@ -1,26 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.scss'
+import { NextLink } from '../components/Link'
 import { getPosts } from './api/api'
+import styles from '../styles/Home.module.scss'
 
 import type { GetStaticProps } from 'next'
-
-type Post = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  revisedAt: string
-  title: string
-  body: string
-}
-
-type PostList = {
-  contents: Array<Post>
-  totalCount: number
-  offset: number
-  limit: number
-}
+import type { PostList } from './api/types'
 
 export default function Home({ postList }: { postList: PostList }) {
   return (
@@ -32,12 +16,13 @@ export default function Home({ postList }: { postList: PostList }) {
       </Head>
 
       <h1>Sample Blog</h1>
+      <NextLink to="/about">About</NextLink>
 
       <main className={styles.main}>
         {postList.contents.map((post) => {
           return (
             <div key={post.id}>
-              <div>{post.title}</div>
+              <NextLink to={'/post/' + post.id}>{post.title}</NextLink>
               <div dangerouslySetInnerHTML={{ __html: post.body }} />
             </div>
           )
@@ -48,7 +33,7 @@ export default function Home({ postList }: { postList: PostList }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await getPosts<PostList>('post')
+  const response = await getPosts<PostList>()
   if (!response) {
     return { notFound: true }
   }
