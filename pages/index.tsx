@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.scss'
 import { getPosts } from './api/api'
 
@@ -37,7 +37,10 @@ export default function Home({ postList }: { postList: PostList }) {
         {postList.contents.map((post) => {
           return (
             <div key={post.id}>
-              <div>{post.title}</div>
+              <div>{post.id}</div>
+              <Link href={'/post/' + post.id}>
+                <a>{post.title}</a>
+              </Link>
               <div dangerouslySetInnerHTML={{ __html: post.body }} />
             </div>
           )

@@ -8,3 +8,7 @@ const client = createClient({
 export const getPosts = async <T>(path: string): Promise<T> => {
   return await client.get({ endpoint: path })
 }
+
+export const getPost = async <T>(path: string, id: string): Promise<T> => {
+  return await client.get({ endpoint: path + '/' + id })
+}
