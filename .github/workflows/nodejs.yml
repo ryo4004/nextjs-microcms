@@ -5,6 +5,9 @@ name: Node.js CI
 
 on: [push, pull_request]
 
+env:
+  NEXT_PUBLIC_MICROCMS_TOKEN: ${{ secrets.NEXT_PUBLIC_MICROCMS_TOKEN }}
+
 jobs:
   build:
 
