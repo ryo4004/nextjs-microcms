@@ -16,6 +16,7 @@ export default function Home({ postList }: { postList: PostList }) {
       </Head>
 
       <h1>Sample Blog</h1>
+      <NextLink to="/about">About</NextLink>
 
       <main className={styles.main}>
         {postList.contents.map((post) => {
@@ -32,7 +33,7 @@ export default function Home({ postList }: { postList: PostList }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await getPosts<PostList>('post')
+  const response = await getPosts<PostList>()
   if (!response) {
     return { notFound: true }
   }

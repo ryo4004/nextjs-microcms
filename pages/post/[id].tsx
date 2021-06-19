@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await getPosts<PostList>('post')
+  const response = await getPosts<PostList>()
   const paths = response.contents.map((post) => `/post/${post.id}`)
   return { paths, fallback: false }
 }
