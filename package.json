@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preprettier": "prettier --write 'styles/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
+    "prepreprettier": "prettier --write 'styles/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
+    "preprettier": "prettier --write 'components/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "prettier": "prettier --write 'pages/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "dependencies": {
