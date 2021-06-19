@@ -13,8 +13,9 @@ export const getPost = async <T>(path: string, id: string): Promise<T> => {
   return await client.get({ endpoint: path + '/' + id })
 }
 
-export const getPosts = async <T>(): Promise<T> => {
-  return await request('post')
+export const getPosts = async <T>(option?: { offset: number; limit: number }): Promise<T> => {
+  const query = option ? '?offset=' + option.offset + '&limit=' + option.limit : ''
+  return await request('post' + query)
 }
 
 export const getAbout = async <T>(): Promise<T> => {
