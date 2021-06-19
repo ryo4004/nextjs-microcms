@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { NextLink } from '../components/Link'
+import { Pagination } from '../components/Pagination'
 import { getPosts } from './api/api'
 import styles from '../styles/Home.module.scss'
 
@@ -7,7 +8,6 @@ import type { GetStaticProps } from 'next'
 import type { PostList } from './api/types'
 
 export default function Home({ postList }: { postList: PostList }) {
-  console.log(postList)
   return (
     <div className={styles.home}>
       <Head>
@@ -17,9 +17,13 @@ export default function Home({ postList }: { postList: PostList }) {
       </Head>
 
       <div className={styles.title}>
-        <h1>Sample Blog</h1>
+        <h1>
+          <NextLink to="/">Sample Blog</NextLink>
+        </h1>
         <NextLink to="/about">About</NextLink>
       </div>
+
+      <Pagination totalCount={postList.totalCount} activePage={1} />
 
       <main className={styles.main}>
         {postList.contents.map((post) => {
@@ -40,12 +44,14 @@ export default function Home({ postList }: { postList: PostList }) {
           )
         })}
       </main>
+
+      <Pagination totalCount={postList.totalCount} activePage={1} />
     </div>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await getPosts<PostList>()
+  const response = await getPosts<PostList>({ offset: 0, limit: 5 })
   if (!response) {
     return { notFound: true }
   }
