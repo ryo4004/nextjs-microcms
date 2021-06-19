@@ -3,23 +3,7 @@ import { getPosts, getPost } from '../api/api'
 import styles from '../../styles/Post.module.scss'
 
 import type { InferGetStaticPropsType, GetStaticProps, GetStaticPaths } from 'next'
-
-type Post = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  revisedAt: string
-  title: string
-  body: string
-}
-
-type PostList = {
-  contents: Array<Post>
-  totalCount: number
-  offset: number
-  limit: number
-}
+import type { Post, PostList } from '../api/types'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 

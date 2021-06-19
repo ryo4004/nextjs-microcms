@@ -4,23 +4,7 @@ import styles from '../styles/Home.module.scss'
 import { getPosts } from './api/api'
 
 import type { GetStaticProps } from 'next'
-
-type Post = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  revisedAt: string
-  title: string
-  body: string
-}
-
-type PostList = {
-  contents: Array<Post>
-  totalCount: number
-  offset: number
-  limit: number
-}
+import type { PostList } from './api/types'
 
 export default function Home({ postList }: { postList: PostList }) {
   return (
