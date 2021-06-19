@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
+import { getPosts } from './api/api'
+
+import type { GetStaticProps } from 'next'
 
 export default function Home() {
   return (
@@ -60,4 +63,29 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+type Post = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  title: string
+  body: string
+}
+
+type PostList = {
+  contents: Array<Post>
+  totalCount: number
+  offset: number
+  limit: number
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await getPosts<PostList>('post')
+  if (!response) {
+    return { notFound: true }
+  }
+  return { props: { posts: response } }
 }
