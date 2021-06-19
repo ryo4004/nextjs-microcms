@@ -7,9 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepreprettier": "prettier --write 'styles/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
-    "preprettier": "prettier --write 'components/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
-    "prettier": "prettier --write 'pages/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
+    "prettier": "prettier --write '{pages,components,styles}/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "dependencies": {
     "microcms-js-sdk": "^1.1.0",

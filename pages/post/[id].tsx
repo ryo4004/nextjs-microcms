@@ -12,7 +12,7 @@ export const Page: NextPage<Props> = ({ post }) => {
   return (
     <div className={styles.post}>
       <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.body }} />
+      <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
       <footer>
         <NextLink to="/">ホーム</NextLink>
       </footer>
