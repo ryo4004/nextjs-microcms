@@ -1,4 +1,5 @@
-import { createClient } from 'microcms-js-sdk' //ES6
+import { createClient } from 'microcms-js-sdk'
+import type { PostList, Post } from './types'
 
 const client = createClient({
   serviceDomain: 'nextjs-microcms',
@@ -20,4 +21,16 @@ export const getPosts = async <T>(option?: { offset: number; limit: number }): P
 
 export const getAbout = async <T>(): Promise<T> => {
   return await request('about')
+}
+
+export const fetchAllPosts = async (offset: number = 0, posts: Array<Post> = []): Promise<Array<Post>> => {
+  const limit = 5
+  const allPosts = posts
+  const response = await getPosts<PostList>({ offset, limit })
+  const newAllPosts = [...allPosts, ...response.contents]
+  if (response.contents.length === limit) {
+    return await fetchAllPosts(offset + response.contents.length, newAllPosts)
+  } else {
+    return newAllPosts
+  }
 }
