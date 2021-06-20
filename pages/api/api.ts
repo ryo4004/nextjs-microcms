@@ -1,6 +1,6 @@
 import { createClient } from 'microcms-js-sdk'
-import { PER_PAGE } from './pagination'
-import type { PostList, Post } from './types'
+import { PER_PAGE } from '../../utilities/pagination'
+import type { PostList, Post } from '../../utilities/types'
 
 const client = createClient({
   serviceDomain: 'nextjs-microcms',

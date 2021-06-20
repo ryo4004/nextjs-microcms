@@ -1,5 +1,5 @@
 import { NextLink } from './Link'
-import { PER_PAGE, range } from '../pages/api/pagination'
+import { PER_PAGE, range } from '../utilities/pagination'
 
 import styles from '../styles/Pagination.module.scss'
 

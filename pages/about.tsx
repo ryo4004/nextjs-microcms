@@ -4,7 +4,7 @@ import { NextLink } from '../components/Link'
 import styles from '../styles/About.module.scss'
 
 import type { InferGetStaticPropsType, GetStaticProps } from 'next'
-import type { About } from './api/types'
+import type { About } from '../utilities/types'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
