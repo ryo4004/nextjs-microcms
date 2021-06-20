@@ -1,11 +1,24 @@
 import { NextLink } from '../../components/Link'
 import { getPost, fetchAllPosts } from '../api/api'
 import styles from '../../styles/Post.module.scss'
+import parse, { DOMNode } from 'html-react-parser'
+import { Element } from 'domhandler/lib/node'
 
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import type { Post } from '../../utilities/types'
+import React from 'react'
+
+const replace = (node: DOMNode) => {
+  if (node instanceof Element && node.name === 'img') {
+    const onClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+      console.log(e.currentTarget.src)
+    }
+    return <img {...node.attribs} onClick={(e) => onClick(e)} />
+  }
+}
 
 export const Page = ({ post }: { post: Post }) => {
+  const element = parse(post.body, { replace })
   return (
     <div className={styles.post}>
       <h1>{post.title}</h1>
@@ -16,7 +29,7 @@ export const Page = ({ post }: { post: Post }) => {
           </div>
         ))}
       </div>
-      <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
+      <div className={styles.body}>{element}</div>
       <footer>
         <NextLink to="/">ホーム</NextLink>
       </footer>
