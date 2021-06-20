@@ -2,11 +2,11 @@ import Head from 'next/head'
 import { NextLink } from '../components/Link'
 import { Pagination } from '../components/Pagination'
 import { getPosts } from './api/api'
-import { PER_PAGE } from './api/pagination'
+import { PER_PAGE } from '../utilities/pagination'
 import styles from '../styles/Home.module.scss'
 
 import type { GetStaticProps } from 'next'
-import type { PostList } from './api/types'
+import type { PostList } from '../utilities/types'
 
 export default function Home({ postList }: { postList: PostList }) {
   return (

@@ -3,7 +3,7 @@ import { getPost, fetchAllPosts } from '../api/api'
 import styles from '../../styles/Post.module.scss'
 
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import type { Post } from '../api/types'
+import type { Post } from '../../utilities/types'
 
 export const Page = ({ post }: { post: Post }) => {
   return (
