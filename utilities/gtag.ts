@@ -1,4 +1,4 @@
-export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const EXIST_GA_ID = GA_ID !== ''
 const EXIST_GTAG = typeof window !== 'undefined' && typeof window.gtag === 'function'
@@ -13,17 +13,17 @@ export const event = ({
   action,
   category,
   label,
-  value = '',
+  value,
 }: {
   action: string
   category: string
-  label: object
+  label: string
   value: string
 }) => {
-  if (EXIST_GTAG &&  EXIST_GA_ID && typeof GA_ID === 'string') {
+  if (EXIST_GTAG && EXIST_GA_ID && typeof GA_ID === 'string') {
     window.gtag('event', action, {
       event_category: category,
-      event_label: JSON.stringify(label),
+      event_label: label,
       value,
     })
   }
