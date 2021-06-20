@@ -2,13 +2,15 @@ import { useState } from 'react'
 import Modal from 'react-modal'
 import { NextLink } from '../../components/Link'
 import { getPost, fetchAllPosts } from '../api/api'
-import styles from '../../styles/Post.module.scss'
 import parse, { HTMLReactParserOptions, DOMNode } from 'html-react-parser'
 import { Element } from 'domhandler/lib/node'
+import styles from '../../styles/Post.module.scss'
 
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import type { Post } from '../../utilities/types'
-import React from 'react'
+
+// モーダルの設定
+Modal.setAppElement('#__next')
 
 export const Page = ({ post }: { post: Post }) => {
   const [modalState, setModalState] = useState<boolean>(false)
@@ -27,9 +29,13 @@ export const Page = ({ post }: { post: Post }) => {
   const element = parse(post.body, parseOptions)
   return (
     <div className={styles.post}>
-      <Modal isOpen={modalState} onRequestClose={() => setModalState(false)} ariaHideApp={false}>
-        <div onClick={() => setModalState(false)}>close</div>
-        <img src={modalSrc} />
+      <Modal
+        isOpen={modalState}
+        onRequestClose={() => setModalState(false)}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <img src={modalSrc + '?q=100'} onClick={() => setModalState(false)} className={styles.image} />
       </Modal>
       <h1>{post.title}</h1>
       <div className={styles.tags}>
