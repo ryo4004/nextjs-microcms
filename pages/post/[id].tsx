@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import Modal from 'react-modal'
+import Image from 'next/image'
 import { NextLink } from '../../components/Link'
 import { getPost, fetchAllPosts } from '../api/api'
-import parse, { HTMLReactParserOptions, DOMNode } from 'html-react-parser'
+import parse, { DOMNode, domToReact } from 'html-react-parser'
 import { Element } from 'domhandler/lib/node'
 import styles from '../../styles/Post.module.scss'
 
@@ -15,18 +16,22 @@ Modal.setAppElement('#__next')
 export const Page = ({ post }: { post: Post }) => {
   const [modalState, setModalState] = useState<boolean>(false)
   const [modalSrc, setModalSrc] = useState<string>('')
-  const parseOptions: HTMLReactParserOptions = {
-    replace: (node: DOMNode) => {
-      if (node instanceof Element && node.name === 'img') {
-        const onClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-          setModalSrc(e.currentTarget.src)
-          setModalState(true)
-        }
-        return <img {...node.attribs} onClick={(e) => onClick(e)} />
+  const replace = (node: DOMNode) => {
+    if (node instanceof Element && node.name === 'img') {
+      const onClick = () => {
+        setModalSrc(node.attribs.src)
+        setModalState(true)
       }
-    },
+      return (
+        <span className={styles.image} onClick={() => onClick()}>
+          <Image {...node.attribs} src={node.attribs.src} alt="post-image" layout="fill" objectFit="contain" />
+        </span>
+      )
+    } else if (node instanceof Element && node.name === 'p') {
+      return <span>{domToReact(node.children, { replace })}</span>
+    }
   }
-  const element = parse(post.body, parseOptions)
+  const element = parse(post.body, { replace })
   return (
     <div className={styles.post}>
       <Modal
@@ -35,7 +40,9 @@ export const Page = ({ post }: { post: Post }) => {
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
-        <img src={modalSrc + '?q=100'} onClick={() => setModalState(false)} className={styles.image} />
+        <span className={styles.modalimage} onClick={() => setModalState(false)}>
+          <Image src={modalSrc} alt="modal-image" quality={100} layout="fill" objectFit="none" />
+        </span>
       </Modal>
       <h1>{post.title}</h1>
       <div className={styles.tags}>
